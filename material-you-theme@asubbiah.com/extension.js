@@ -77,7 +77,7 @@ export default class MaterialYou extends Extension {
             log(e);
         }
 
-        this.apply_theme(base_presets, color_mappings);
+        //this.apply_theme(base_presets, color_mappings);
     }
 
     disable() {
@@ -163,7 +163,8 @@ export default class MaterialYou extends Extension {
         this.write_str(css, config_path + "/gtk-4.0/gtk.css");
         this.write_str(css, config_path + "/gtk-3.0/gtk.css");
          
-        if (ext_utils.check_npm(this.extensiondir)) {
+        //if (ext_utils.check_npm(this.extensiondir)) {
+        if (ext_utils.check_bin("/usr/bin/sassc")) { 
             const version = Config.PACKAGE_VERSION.substring(0, 2);
     
           this.modify_colors(
@@ -198,8 +199,8 @@ export default class MaterialYou extends Extension {
     
     remove_theme() {
         // Undoing changes to theme when disabling extension
-        this.delete_file(GLib.get_home_dir() + "/.config/gtk-4.0/gtk.css");
-        this.delete_file(GLib.get_home_dir() + "/.config/gtk-3.0/gtk.css");
+        //this.delete_file(GLib.get_home_dir() + "/.config/gtk-4.0/gtk.css");
+        //this.delete_file(GLib.get_home_dir() + "/.config/gtk-3.0/gtk.css");
     
         // Get prefs
         // const settings = ExtensionUtils.getSettings(PREFS_SCHEMA);
@@ -313,7 +314,8 @@ export default class MaterialYou extends Extension {
     
         try {
             let proc = Gio.Subprocess.new(
-                [this.extensiondir + '/node_modules/sass/sass.js', scss_path, output_path],
+                //[this.extensiondir + '/node_modules/sass/sass.js', scss_path, output_path],
+                ['/usr/bin/sassc', scss_path, output_path],
                 Gio.SubprocessFlags.NONE
             );
     
